@@ -1,0 +1,17 @@
+Game genre:
+
+Idea: 
+
+game: neverending / include levels
+
+when end: the player health == 0 / die
+
+how to update games: new weapons, new characters, 
+
+things have to include:
+
+bullets, 
+
+1. Player: 
+
+2. Enemy
