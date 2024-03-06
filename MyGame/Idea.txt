@@ -2,16 +2,19 @@ Game genre:
 
 Idea: 
 
-game: neverending / include levels
+GAME: neverending / include levels
 
-when end: the player health == 0 / die
+WHEN END: the player health == 0 / die
 
-how to update games: new weapons, new characters, 
+HOW TO UPDATE GAME: new weapons, new characters, 
 
-things have to include:
+THINGS TO INCLUDE
 
-bullets, 
+bullets, health
 
 1. Player: 
+  - 
+2. Enemy:
+  - infinite bullets 
+  - health: according to level
 
-2. Enemy
