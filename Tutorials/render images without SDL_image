@@ -1,0 +1,99 @@
+#include <iostream>
+#include <SDL2/SDL.h>
+#include <SDL2_image/SDL_image.h>
+
+using namespace std;
+
+//global const and variables
+const int SCREEN_WIDTH = 800;
+const int SCREEN_HEIGHT = 400;
+const char* WINDOW_TITLE = "MY IMAGE SDL";
+
+SDL_Window* window = NULL;
+SDL_Surface* surface = NULL;
+SDL_Surface* background = NULL;
+
+//start up SDL and create window
+bool init() {
+    //initialisation flag
+    bool success = true;
+    
+    //initialise SDL
+    if (SDL_Init(SDL_INIT_EVERYTHING) < 0) {
+        cout << "SDL could not initialise! SDL_Error: " << SDL_GetError();
+        success = false;
+    }
+    
+    else {
+        //Create window
+        window = SDL_CreateWindow(WINDOW_TITLE, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+        if (window == NULL) {
+            cout << "Window could not be created! SDL Error: " << SDL_GetError();
+            success = false;
+        }
+        
+        else {
+            //get window surface
+            surface = SDL_GetWindowSurface(window);
+        }
+    }
+    return success;
+}
+
+//load media
+bool loadMedia() {
+    //loading success flag
+    bool success = true;
+    
+    //Load Splash Image
+    background = SDL_LoadBMP("hello_world.bmp");
+    if (background == NULL) {
+        cout << "Unable to load image! SDL Error: " << SDL_GetError();
+        success = false;
+    }
+    
+    return success;
+}
+
+//free media and shut down the window
+void close() {
+    //deallocate surface;
+    SDL_FreeSurface(background);
+    background = NULL;
+    
+    //destroy window
+    SDL_DestroyWindow(window);
+    window = NULL;
+    
+    //Quit SDL:
+    SDL_Quit();
+}
+
+int main(int argc, char* argv[])
+{
+    //Start up and create window
+    if (!init()) {
+        cout << "Failed to initialise! ";
+    }
+    else {
+        if(!loadMedia())
+            cout << "Failed to load media";
+        else {
+            SDL_BlitSurface(background, NULL, surface, NULL);
+            SDL_UpdateWindowSurface(window);
+        }
+    }
+    
+    SDL_Event e;
+    bool quit = false;
+    while(quit == false) {
+        while (SDL_PollEvent(&e)) {
+            if(e.type == SDL_QUIT)
+                quit = true;
+        }
+    }
+    
+    //Free resources
+    close();
+    return 0;
+}
