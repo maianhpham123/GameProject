@@ -1,8 +1,8 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 #include <SDL2_image/SDL_image.h>
-#include "file.h"
-#include "graphics.h"
+#include "file.h" //from ProjectsToSmallFiles
+#include "graphics.h" //from ProjectsToSmallFiles
 
 using namespace std;
 
